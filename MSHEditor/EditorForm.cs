@@ -5,7 +5,6 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.IO;
 using System.ComponentModel;
-using System.Reflection;
 using LibSWBF2;
 using LibSWBF2.MSH;
 using LibSWBF2.MSH.Types;

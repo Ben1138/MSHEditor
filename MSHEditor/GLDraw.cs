@@ -18,6 +18,7 @@ namespace MSHEditor {
         public Color BackgroundColor { get; set; }
         public Color CollisionColor { get; set; } = Color.FromArgb(0, 255, 0);
         public Color TerrainCutColor { get; set; } = Color.FromArgb(255, 0, 255);
+        public Color MiscColor { get; set; } = Color.FromArgb(0, 0, 255);
         public SEGMDraw[] SegmentsToRender { get; set; }
         public DrawMode DrawMode { get; set; }
 
@@ -116,14 +117,18 @@ namespace MSHEditor {
                         (int)(segm.segment.Material.Diffuse.B * 255)
                     );
                     
-                    if (segm.tag == ModelTag.Collision) {
+                    if (segm.tag == ModelTag.Collision || segm.tag == ModelTag.VehicleCollision) {
                         primitiveDraw = wireframeMode;
                         color = CollisionColor;
                     }
                     else if (segm.tag == ModelTag.TerrainCut) {
                         primitiveDraw = wireframeMode;
                         color = TerrainCutColor;
-                    }
+                    } 
+                    else if (segm.tag == ModelTag.Miscellaneous) {
+                        primitiveDraw = wireframeMode;
+                        color = MiscColor;
+                    } 
                     else {
                         if (DrawMode == DrawMode.Textured)
                             primitiveDraw = texturedMode;
