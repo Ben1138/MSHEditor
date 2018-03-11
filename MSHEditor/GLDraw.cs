@@ -109,8 +109,13 @@ namespace MSHEditor {
             foreach (SEGMDraw segm in SegmentsToRender) {
                 foreach (Polygon poly in segm.segment.Polygons) {
                     PrimitiveType primitiveDraw = PrimitiveType.Points;
-                    Color color = segm.segment.Material.Diffuse;
-
+                    Color color = Color.FromArgb(
+                        (int)(segm.segment.Material.Diffuse.A * 255),
+                        (int)(segm.segment.Material.Diffuse.R * 255),
+                        (int)(segm.segment.Material.Diffuse.G * 255),
+                        (int)(segm.segment.Material.Diffuse.B * 255)
+                    );
+                    
                     if (segm.tag == ModelTag.Collision) {
                         primitiveDraw = wireframeMode;
                         color = CollisionColor;
