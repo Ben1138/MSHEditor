@@ -123,14 +123,14 @@ namespace MSHEditor {
             catch (FileNotFoundException) {
                 MessageBox.Show(path + " could not be found!", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            catch (ArgumentException) {
-                MessageBox.Show(path + " is not a valid File!", "Not Valid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            catch (ArgumentException ex) {
+                MessageBox.Show(path + " is not a valid File!\n" + ex.Message, "Not Valid", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (InsufficientPermissionsException) {
                 MessageBox.Show("Insufficient permissions on File " + path, "Insufficient Permissions", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            catch (IOException) {
-                MessageBox.Show("Error while reading/writing File", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            catch (IOException ex) {
+                MessageBox.Show("Error while reading/writing File!\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (EndOfDataException) {
                 MessageBox.Show("Unexpected end of Data!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -174,7 +174,7 @@ namespace MSHEditor {
                     if (msh.Models[i].Geometry != null) {
                         node.Nodes.Add("Bounding Box").Name = "GBOX" + i;
 
-                        for (int j = 0; j < msh.Models[i].Geometry.Segments.Length; j++) {
+                        for (int j = 0; j < msh.Models[i].Geometry.Segments.Count; j++) {
                             node.Nodes.Add("Segment " + (j + 1)).Name = "SEG" + i + "." + j;
                         }
                     }
